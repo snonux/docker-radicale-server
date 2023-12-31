@@ -8,7 +8,7 @@ run: build
 	docker run \
 		-v collections:/collections \
 		-v auth:/auth \
-		-p 5232:5232 \
+		-p 8080:8080 \
 		--name radicale radicale
 aws: build
 	docker tag radicale:latest 634617747016.dkr.ecr.eu-central-1.amazonaws.com/radicale:latest

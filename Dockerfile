@@ -12,6 +12,6 @@ COPY ./htpasswd-test /auth/htpasswd
 RUN chown 700 /auth
 RUN chown 600 /auth/htpasswd
 
-EXPOSE 5232
+EXPOSE 8080
 USER radicale
 CMD ["python3", "-m", "radicale", "--debug"]
