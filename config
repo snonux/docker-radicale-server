@@ -4,7 +4,7 @@ hosts = 0.0.0.0:5232, [::]:5232
 
 [auth]
 type = htpasswd
-htpasswd_filename = /config/htpasswd
+htpasswd_filename = /auth/htpasswd
 htpasswd_encryption = md5
 
 [storage]
