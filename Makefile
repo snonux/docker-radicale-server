@@ -1,5 +1,7 @@
+TAG ?= latest
+
 build:
-	docker build -t radicale .
+	docker build -t radicale$(TAG) .
 run: build
 	if [ ! -d collections ]; then mkdir collections; fi
 	if [ ! -d auth ]; then mkdir auth; fi
@@ -9,7 +11,13 @@ run: build
 		-v collections:/collections \
 		-v auth:/auth \
 		-p 8080:8080 \
-		--name radicale radicale
+		--name radicale radicale$(TAG)
+f3s: build
+	docker tag radicale:$(TAG) r0.lan.buetow.org:30001/radicale:$(TAG)
+	docker push r0.lan.buetow.org:30001/radicale:$(TAG)
+f3s_external: build
+	docker tag radicale:$(TAG) registry.f3s.buetow.org/radicale:$(TAG)
+	docker push registry.f3s.buetow.org/radicale:$(TAG)
 aws: build
-	docker tag radicale:latest 634617747016.dkr.ecr.eu-central-1.amazonaws.com/radicale:latest
-	docker push 634617747016.dkr.ecr.eu-central-1.amazonaws.com/radicale:latest
+	docker tag radicale$(TAG) 634617747016.dkr.ecr.eu-central-1.amazonaws.com/radicale$(TAG)
+	docker push 634617747016.dkr.ecr.eu-central-1.amazonaws.com/radicale$(TAG)
